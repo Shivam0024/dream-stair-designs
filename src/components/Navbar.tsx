@@ -1,12 +1,13 @@
 
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import Logo from "./Logo";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,7 +45,11 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className="text-tds-dark font-medium hover:text-tds-purple transition-colors"
+                className={`font-medium transition-colors ${
+                  location.pathname === link.path
+                    ? "text-tds-purple"
+                    : "text-tds-dark hover:text-tds-purple"
+                }`}
               >
                 {link.name}
               </Link>
@@ -70,7 +75,11 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className="text-tds-dark font-medium hover:text-tds-purple transition-colors"
+                  className={`font-medium transition-colors ${
+                    location.pathname === link.path
+                      ? "text-tds-purple"
+                      : "text-tds-dark hover:text-tds-purple"
+                  }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.name}
